@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Varsity Student Portal - Login</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white p-8 rounded-lg shadow-md border border-gray-200 w-full max-w-md">
+    <div class="text-center mb-6">
+      <h1 class="text-2xl font-bold text-gray-800">University Portal</h1>
+      <p class="text-sm text-gray-500">Student Course Registration System</p>
+    </div>
+
+    <!-- Tab Toggle: Login vs Register -->
+    <div class="flex border-b border-gray-200 mb-6">
+      <button id="tab-login-btn" onclick="showAuthTab('login')" class="w-1/2 py-2 text-center text-sm font-semibold text-blue-600 border-b-2 border-blue-600">Login</button>
+      <button id="tab-reg-btn" onclick="showAuthTab('reg')" class="w-1/2 py-2 text-center text-sm font-semibold text-gray-500 border-b-2 border-transparent">Register</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Student ID</label>
+        <input type="text" id="login-id" required  class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Password</label>
+        <input type="password" id="login-pass" required  class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+      </div>
+      <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded text-sm transition">Sign In</button>
+    </form>
+
+    <!-- Registration Form (Hidden by default) -->
+    <form id="reg-form" onsubmit="handleRegister(event)" class="space-y-4 hidden">
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Full Name</label>
+        <input type="text" id="reg-name" required  class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Student ID</label>
+        <input type="text" id="reg-id" required  class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Department</label>
+        <select id="reg-dept" class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+          <option value="CSE">CSE</option>
+          <option value="EEE">EEE</option>
+          <option value="BBA">BBA</option>
+          <option value="BBA">LAW</option>
+          <option value="BBA">Fashion Design</option>
+          <option value="BBA">Textile</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-xs font-semibold text-gray-600 mb-1">Password</label>
+        <input type="password" id="reg-pass" required  class="w-full border border-gray-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-blue-500">
+      </div>
+      <button type="submit" class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded text-sm transition">Create Account</button>
+    </form>
+
+  </div>
+
+  <script>
+    function showAuthTab(type) {
+      if (type === 'login') {
+        document.getElementById('login-form').classList.remove('hidden');
+        document.getElementById('reg-form').classList.add('hidden');
+        document.getElementById('tab-login-btn').className = 'w-1/2 py-2 text-center text-sm font-semibold text-blue-600 border-b-2 border-blue-600';
+        document.getElementById('tab-reg-btn').className = 'w-1/2 py-2 text-center text-sm font-semibold text-gray-500 border-b-2 border-transparent';
+      } else {
+        document.getElementById('login-form').classList.add('hidden');
+        document.getElementById('reg-form').classList.remove('hidden');
+        document.getElementById('tab-reg-btn').className = 'w-1/2 py-2 text-center text-sm font-semibold text-blue-600 border-b-2 border-blue-600';
+        document.getElementById('tab-login-btn').className = 'w-1/2 py-2 text-center text-sm font-semibold text-gray-500 border-b-2 border-transparent';
+      }
+    }
+
+    function handleLogin(e) {
+      e.preventDefault();
+      const studentId = document.getElementById('login-id').value;
+      localStorage.setItem('student_id', studentId);
+      window.location.href = 'dashboard.html';
+    }
+
+    function handleRegister(e) {
+      e.preventDefault();
+      alert('Account created! Please log in now.');
+      showAuthTab('login');
+    }
+  </script>
+</body>
+</html>
